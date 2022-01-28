@@ -1,8 +1,8 @@
-public class Vacia extends Pza{
+public class Vacia extends PzaJug{
 
-    public Vacia(){
+    public Vacia(int fila, int columna, String tipo){
 
-	super();
+	super(fila,columna, tipo);
 
     }
 
