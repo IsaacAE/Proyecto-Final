@@ -6,8 +6,8 @@ public class PzaBlan extends PzaJug{
     
     public PzaBlan(int fila, int columna, boolean color, String tipo){
 
-	super(fila, columna, tipo);
-	this.color = color;
+	super(fila, columna, color,tipo);
+	//this.color = color;
 
 	
 	

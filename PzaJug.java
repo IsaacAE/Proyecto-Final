@@ -2,10 +2,11 @@ public class PzaJug extends Pza{
 
 
     int fila, columna;
+    boolean color;
     String tipo;
     
-    public PzaJug(int fila, int columna, String tipo){
-
+    public PzaJug(int fila, int columna, boolean color,String tipo){
+	this.color = color;
 	this.fila = fila;
 	this.columna = columna;
 	this.tipo = tipo;
@@ -23,6 +24,9 @@ public class PzaJug extends Pza{
 	return this.tipo;
     }
 
+  public boolean getColor(){
+	return this.color;
+    }
 
     public void setFila(int fila){
 	this.fila=fila;
