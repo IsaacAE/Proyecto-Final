@@ -22,9 +22,10 @@ public boolean move(PzaJug tablero[][], int x, int y, int w, int z){
 	     
 	 	int i;
 		    PzaJug aux = new PzaJug(0,0,true,"aux");
+		    //MOVER DERECHA
 	if(x==w){
 	    if(y<z){
-		for( i = y+1; i<=z; i++){
+		for(i = (y+1); i<z; i++){
 	
 		    aux = tablero[x][i];
 		    if(aux.getTipo()!="vac"){
@@ -35,7 +36,7 @@ public boolean move(PzaJug tablero[][], int x, int y, int w, int z){
 		
 		}else{
 
-		    	for( i = z+1; i<=y; i++){
+		    	for( i = z+1; i<y; i++){
 		  
 		    aux = tablero[x][i];
 		    if(aux.getTipo()!="vac"){
@@ -44,10 +45,12 @@ public boolean move(PzaJug tablero[][], int x, int y, int w, int z){
 		}
 	    }
 
-	}else if(y==z){
-
+	}//
+	
+	 if(y==z){
+	//MOVER ABAJO
 	       if(x<w){
-		for( i = x+1; i<=w; i++){
+		for( i = (x+1); i<w; i++){
 	        
 		    aux = tablero[i][y];
 		    if(aux.getTipo()!="vac"){
@@ -55,10 +58,9 @@ public boolean move(PzaJug tablero[][], int x, int y, int w, int z){
 		    }
 		    
 		}
-		}
-	}else{
+		}else if(x>w){
 
-		    	for( i = w+1; i<=x; i++){
+		    	for( i = (x-1); i>w; i--){
 		 
 		    aux = tablero[i][y];
 		    if(aux.getTipo()!="vac"){
@@ -68,6 +70,7 @@ public boolean move(PzaJug tablero[][], int x, int y, int w, int z){
 			}
 
 
+	}
 	}
    
 	if((x!=w)&&(y!=z)){

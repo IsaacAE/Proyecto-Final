@@ -18,7 +18,7 @@ public class PeonNeg extends PzaJug{
 	boolean g=true;
 	
 		if((z-y)==0){
-	System.out.println("HOLA");
+	
 		        if((w-x)==1){
 
 			    }else{g=false;}

@@ -19,7 +19,6 @@ public class PeonBlan extends PzaJug{
 	boolean g=true;
 	
 		if((y-z)==0){
-	System.out.println("HOLA");
 		        if((x-w)==1){
 
 			    }else{g=false;}

@@ -26,21 +26,20 @@ public class QueenNeg extends PzaJug{
 	PzaJug help = new PzaJug(0,0,true,"aux");
 
 	if((x==w)||(y==z)){
-	aux = tablero[x][y];
 	if(x==w){
 	    if(y<z){
-		for( i = y+1; i<=z; i++){
+		for( i = y+1; i<z; i++){
 	
 		    aux = tablero[x][i];
 		    if(aux.getTipo()!="vac"){
-			g = false;
+			g= false;
 		    }
 		    
 		}
 		
 		}else{
 
-		    	for( i = z+1; i<=y; i++){
+		    	for( i = z+1; i<y; i++){
 		  
 		    aux = tablero[x][i];
 		    if(aux.getTipo()!="vac"){
@@ -49,10 +48,12 @@ public class QueenNeg extends PzaJug{
 		}
 	    }
 
-	}else if(y==z){
+	}//
+	
+	if(y==z){
 
 	       if(x<w){
-		for( i = x+1; i<=w; i++){
+		for( i = x+1; i<w; i++){
 	        
 		    aux = tablero[i][y];
 		    if(aux.getTipo()!="vac"){
@@ -60,26 +61,30 @@ public class QueenNeg extends PzaJug{
 		    }
 		    
 		}
-		}
-	}else{
+		}else if(x>w){
 
-		    	for( i = w+1; i<=x; i++){
+		    	for( i = (x-1); i>w; i--){
 		 
 		    aux = tablero[i][y];
 		    if(aux.getTipo()!="vac"){
-			g= false;
+			g = false;
 		    }
 		
-		    }
+			}
+
+
+	}
+	}
+	
 
 	//DIAGONALES
-	}
+	}if(((w-x)==(z-y)||((w-x)==(y-z)))){
 
-	}else if((x-w)==(z-y)){
+	if((x-w)==(z-y)){
 	     p=x-1;
 	     j=y+1;
 	     while((p>w)){
-		     aux = tablero[x-1][y+1];
+		     aux = tablero[p][y+1];
 		     if(aux.getTipo()=="vac"){
 			 
 
@@ -93,7 +98,7 @@ public class QueenNeg extends PzaJug{
 	     p=x-1;
 	     j=y-1;
 	     while((p>w)){
-		     aux = tablero[x-1][y-1];
+		     aux = tablero[p][y-1];
 		     if(aux.getTipo()=="vac"){
 			 
 
@@ -103,11 +108,13 @@ public class QueenNeg extends PzaJug{
 		     
 	     }
 	     //HACIA ABAJO DERECHA
-	}else if((w-x)==(z-y)){
-	     p=w+1;
+	}
+	
+	if((w-x)==(z-y)){
+	     p=x+1;
 	     j=y+1;
-	     while((p<x)){
-		     aux = tablero[w+1][y+1];
+	     while((p<w)){
+		     aux = tablero[p][y+1];
 		     if(aux.getTipo()=="vac"){
 			 
 
@@ -118,23 +125,26 @@ public class QueenNeg extends PzaJug{
 	     }
 	     //HACIA ABAJO IZQUIERDA
 	}else if((w-x)==(y-z)){
-	     p=w+1;
+	     p=x+1;
 	     j=y-1;
 	     while((p<w)){
-		     aux = tablero[w+1][y-1];
-		     if(aux.getTipo()=="vac"){
-			 
-
-		     }else{g=false;}
+		     aux = tablero[p][j];
+		     if(aux.getTipo()!="vac"){
+			 g=false;
+			
+		     }
 
 		     p++;
+		     j--;
 		     
 	     }
-            }
-	 
+            }else{g=false;}
+
+}else{ g=false;}	 
 	    
 	  
 	 return g;
+	 
     }
     
 
