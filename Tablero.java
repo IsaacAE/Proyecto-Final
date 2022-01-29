@@ -164,19 +164,12 @@ public class Tablero{
       	tablero[3][5]= f1;
 
 //Seleccion de numero de turnos a jugar
-	System.out.println("BIENVENIDO\n \n Recuerda que las filas son las de sentido horizontal y las columnas de sentido vertical \n Piezas blancas en minusculas y negras en mayusculas \n Escribe primero el numero de fila y luego el numero de columna \n");
 	 do{
 		turnos=false;
 		System.out.println("Dime, ¿de cuántos turnos deseas que sea tu partida?\n1.20 TURNOS\n2.40 TURNOS\n3.100 TURNOS");
 		 try{
 		
 		partido=escaner.nextInt();
-
-		/**
-		 *Excepcion que se dispara si se reponde con un tipo de dato erroneo
-		 *@author Alcantara Estrada Kevin
-		 *@throws InputMismatchException
-		 */
 		    }catch(InputMismatchException et){
 		
 		     turnos=true;
@@ -239,11 +232,6 @@ public class Tablero{
     
    
     temp = tablero[x1][y1];
-    	/**
-	 * Excepcion que se dispara si se intenta responder con un tipo de dato diferente al solicitado
-	 *@author Alcantara Estrada Kevin
-	 *@throws InputMismatchException
-	 */
     	}catch(InputMismatchException ez){
         System.out.println("\n¿Al menos sabes jugar?, intenta de nuevo");
 	    coco=false;
@@ -251,11 +239,7 @@ public class Tablero{
 	     imprimir_tablero(tablero,5,5);
 	     
      escaner.next();
-    	/**
-		 *Excepcion que se dispara si se intenta tomar o mover a una pieza fuera del rango del arreglo
-		 *@author Alcantara Estrada Kevin
-		 *@throws ArrayIndexOutOfBoundsException
-		 */
+    
     
             }catch(ArrayIndexOutOfBoundsException ex){
 
@@ -298,11 +282,6 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 		    try{
 		System.out.println("\n¿Qué deseas hacer?\n1.Mover\n2.Comer\n3.Salir del juego\n");
 		resp=escaner.nextInt();
-			/**
-	 * Excepcion que se dispara si se intenta responder con un tipo de dato diferente al solicitado
-	 *@author Alcantara Estrada Kevin
-	 *@throws InputMismatchException
-	 */
 		    }catch(InputMismatchException et){
         System.out.println("\nBuen intento, ahora elige bien");
 	    bobo=true;

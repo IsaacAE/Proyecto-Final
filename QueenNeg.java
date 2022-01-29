@@ -149,7 +149,7 @@ public class QueenNeg extends PzaJug{
 	     }
 	     //HACIA ABAJO IZQUIERDA
 	}else if((w-x)==(y-z)){
-	     p=w+1;
+	     p=x+1;
 	     j=y-1;
 	     while((p<w)){
 		     aux = tablero[p][y-1];
