@@ -135,16 +135,16 @@ public class QueenNeg extends PzaJug{
 	     }
 	     //HACIA ABAJO DERECHA
 	}else if((w-x)==(z-y)){
-	     p=w+1;
+	     p=w-1;
 	     j=y+1;
-	     while((p<x)){
+	     while((p>x)){
 		     aux = tablero[p][y+1];
 		     if(aux.getTipo()=="vac"){
 			 
 
 		     }else{g=false;}
 
-		     p++;
+		     p--;
 		     
 	     }
 	     //HACIA ABAJO IZQUIERDA
