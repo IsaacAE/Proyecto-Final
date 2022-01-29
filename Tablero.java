@@ -1,9 +1,24 @@
+
+//Importaciones para uso del programa
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-
+/**
+*Clase que simula un tablero de ajedrez
+*@author Alcantara Estrada Kevin Isaac
+*@version 23.0
+*/
 public class Tablero{
-    
+    /**
+*Metodo que mueve una pieza de un sitio a otro
+*@author Alcantara Estrada Kevin Isaac
+*@version 1.0
+*@param tablero[][] Arreglo de dos dimensiones de objetos de la clase PzaJug donde se trabajara
+*@param x valor de la fila actual de la pieza
+*@param y valor actual de la columna de la pieza
+*@param w valor de la fila a la que se quiere mover la pieza
+*@param valor de la columna a la cual se quiere mover la pieza
+*/
     public static void mover(PzaJug tablero[][], int x, int y, int w, int z){
 	int g;
 	PzaJug mov = new PzaJug(0,0,true,"vac");
@@ -17,7 +32,14 @@ public class Tablero{
     tablero[x][y] = vac;
     tablero[w][z]= mov;  
 }
-
+ /**
+*Metodo que imprime un arreglo de dos diemsiones (tablero)
+*@author Alcantara Estrada Kevin Isaac
+*@version 1.0
+*@param tablero[][] Arreglo de dos dimensiones de objetos de la clase PzaJug con el que se trabajara
+*@param filas Numero de filas del tablero
+*@param columnas Numero de columnas del tablero
+*/
     public static void imprimir_tablero(PzaJug tablero[][],int filas, int columnas){
 	for ( filas=0; filas < tablero.length; filas++){
     for ( columnas=0; columnas < tablero[filas].length; columnas++) {
@@ -36,72 +58,25 @@ public class Tablero{
     }
 
 
-    public static boolean verificar(PzaJug tablero[][], int x, int y, int w, int z){
-	int i;
-	boolean valor=true;
-		    PzaJug aux = new PzaJug(0,0,true,"vac");
-	if(x==w){
-	    if(y<z){
-		for( i = y+1; i<=z; i++){
-	
-		    aux = tablero[x][i];
-		    if(aux.getTipo()!="vac"){
-			valor = false;
-		    }
-		    
-		}
-		
-		}else{
-
-		    	for( i = z+1; i<=y; i++){
-		  
-		    aux = tablero[x][i];
-		    if(aux.getTipo()!="vac"){
-			valor = false;
-		    }
-		}
-	    }
-
-	}else if(y==z){
-
-	       if(x<w){
-		for( i = x+1; i<=w; i++){
-	        
-		    aux = tablero[i][y];
-		    if(aux.getTipo()!="vac"){
-			valor = false;
-		    }
-		    
-		}
-		}
-	}else{
-
-		    	for( i = w+1; i<=x; i++){
-		 
-		    aux = tablero[i][y];
-		    if(aux.getTipo()!="vac"){
-			valor = false;
-		    }
-		
-			}
-
-
-	}
-   
-	if((x!=w)&&(y!=z)){
-	    valor = false;
-	}
-	return valor;
-    }
-
+    /**
+*Metodo main para ejecutar el programa
+*@author Alcantara Estrada Kevin Isaac
+*@version 7.0
+*@param String[] args
+*/
 
     public static void main(String[] args){
-
+	//Principales variables a utilizar
 	int x1=0,y1=0,z=0,w=0,contador=4, resp=0, partido=0;
 	boolean coco=false,juego=true, turnos; 
+	
+	//Escaner para recibir datos del usuario
 	Scanner escaner = new Scanner(System.in);
-	 PzaJug temp = new PzaJug(0,0,true,"vac");
-
+	 
+	 
+	PzaJug temp = new PzaJug(0,0,true,"vac");
+	
+	//COLOCACION DE LAS PIEZAS
         Vacia a = new Vacia(0,0,true,"vac");
         Vacia b = new Vacia(0,0,true,"vac");
 	Vacia c = new Vacia(0,0,true,"vac");
@@ -162,7 +137,6 @@ public class Tablero{
 	tablero[0][2] = reyn;
 	tablero[0][3] = queenN;
        	tablero[1][0] = peonNeg1;
-	//	tablero[1][0] = extra;
 	tablero[1][1] = peonNeg2;
         tablero[1][2] = peonNeg3;
 	tablero[1][3] = peonNeg4;
@@ -189,12 +163,20 @@ public class Tablero{
        	tablero[3][4]= e1;
       	tablero[3][5]= f1;
 
+//Seleccion de numero de turnos a jugar
+	System.out.println("BIENVENIDO\n \n Recuerda que las filas son las de sentido horizontal y las columnas de sentido vertical \n Piezas blancas en minusculas y negras en mayusculas \n Escribe primero el numero de fila y luego el numero de columna \n");
 	 do{
 		turnos=false;
 		System.out.println("Dime, ¿de cuántos turnos deseas que sea tu partida?\n1.20 TURNOS\n2.40 TURNOS\n3.100 TURNOS");
 		 try{
 		
 		partido=escaner.nextInt();
+
+		/**
+		 *Excepcion que se dispara si se reponde con un tipo de dato erroneo
+		 *@author Alcantara Estrada Kevin
+		 *@throws InputMismatchException
+		 */
 		    }catch(InputMismatchException et){
 		
 		     turnos=true;
@@ -217,6 +199,8 @@ public class Tablero{
 		contador =100;
 		break;
 	    }
+	    
+	    //Comienza el juego
 	while(juego==true){
 	while(contador!=0){
   System.out.println("\n \n");
@@ -232,7 +216,7 @@ public class Tablero{
 	    imprimir_tablero(tablero,5,5);
 
 	    
-	
+	//Se solicitan coordenadas de las piezas al usuario
 	do{ 
 	try{
 	    coco=true;
@@ -255,6 +239,11 @@ public class Tablero{
     
    
     temp = tablero[x1][y1];
+    	/**
+	 * Excepcion que se dispara si se intenta responder con un tipo de dato diferente al solicitado
+	 *@author Alcantara Estrada Kevin
+	 *@throws InputMismatchException
+	 */
     	}catch(InputMismatchException ez){
         System.out.println("\n¿Al menos sabes jugar?, intenta de nuevo");
 	    coco=false;
@@ -262,7 +251,11 @@ public class Tablero{
 	     imprimir_tablero(tablero,5,5);
 	     
      escaner.next();
-    
+    	/**
+		 *Excepcion que se dispara si se intenta tomar o mover a una pieza fuera del rango del arreglo
+		 *@author Alcantara Estrada Kevin
+		 *@throws ArrayIndexOutOfBoundsException
+		 */
     
             }catch(ArrayIndexOutOfBoundsException ex){
 
@@ -278,6 +271,8 @@ public class Tablero{
     
     
 	/*Siempre se ejecuta*/
+	
+	//Verificacion de piezas elegidas
 if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 	 System.out.println("\n¿Eres bobo?, pierdes un turno por listillo \n");
 	 contador--;
@@ -294,6 +289,8 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
     //break;
     }else{
     PzaJug  ojo = new PeonBlan(0,0,true,"vac");
+		
+		//Se solicita al usario que desea hacer
 		ojo = tablero[w][z];
 		boolean bobo;
 		do{
@@ -301,6 +298,11 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 		    try{
 		System.out.println("\n¿Qué deseas hacer?\n1.Mover\n2.Comer\n3.Salir del juego\n");
 		resp=escaner.nextInt();
+			/**
+	 * Excepcion que se dispara si se intenta responder con un tipo de dato diferente al solicitado
+	 *@author Alcantara Estrada Kevin
+	 *@throws InputMismatchException
+	 */
 		    }catch(InputMismatchException et){
         System.out.println("\nBuen intento, ahora elige bien");
 	    bobo=true;
@@ -313,7 +315,7 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 		    }
 		}while(bobo==true);
 		switch(resp){
-
+	//La pieza se mueve
 		        case 1:
 			    if(ojo.getTipo()!="vac"){
 				if(ojo.getColor()==temp.getColor()){
@@ -342,7 +344,7 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 
 			    }
 			    break;
-
+	//La pieza come otra pieza
 		case 2:
 
 		    if(ojo.getTipo()=="vac"){
@@ -366,40 +368,35 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 
 		    }       contador--;
 		    break;
-
+	//Salir del juego
 		case 3:
 		    contador = -100;
 		    juego = false;
 		    System.out.println("Vale, hasta luegoooo");
 		    return;
-		    //break;
+		    
 		    
 		default:
 		   
 		    System.out.println("\nAhhhh, chistosito, anda, elige bien");
 		    
 		    break;
-		    //contador = -100;
-		    //juego = false;
-		    //return;
-
+		   
 		}
 
-    /*  System.out.println("\nPierdes un turno por tramposo");
-	  contador--;
-	  break;*/
+   
 }
 
          	
 	
 
-		//break;
+		
 
 		
 
 	/*Siempre se ejecuta*/
 	   
-	//ver quien perdio
+	//Se pregunta si alguno perdio
 		int peonB=0, peonN=0, kingN=0, kingB=0, kuinB=0, kuinN=0, torreB=0, torreN=0, caballoN=0, caballoB=0;
 		for( int k = 0; k < tablero.length; k++){
 
@@ -454,12 +451,12 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 			//FIN DE REVISIÓN
 		    }
 		}
-
+	//Pierde negro
 		if(peonB==0||torreB==0||caballoB==0||kingB==0||kuinB==0){
 		    System.out.println("NEGRAS GANAN / BLANCAS PIERDEN");
 		    return;
 		}
-
+	//Pierde blancas
 			if(peonN==0||torreN==0||caballoN==0||kingN==0||kuinN==0){
 		    System.out.println("NEGRAS PIERDEN / BLANCAS GANA");
 		    return;
@@ -475,7 +472,7 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 	}
 
 
-
+	//Eleccion de ganador si se acaban los turnos
 	        int winner = (int)(Math.random()*100);
 
 		if(winner<=50){
@@ -490,8 +487,8 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 	
 	
 	}
-	
+//FIN DEL PROGRAMA	
 }
-	
+	//FIN DE LA CLASE
 
 
