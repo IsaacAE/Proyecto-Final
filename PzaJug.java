@@ -41,6 +41,13 @@ public class PzaJug extends Pza{
 	this.columna=columna;
     }
 
+public boolean move(PzaJug tablero[][], int x, int y, int w, int z){
+	boolean g=true;
+
+	     g=false;
+	 
+	 return g;
+	 }
 
       
 

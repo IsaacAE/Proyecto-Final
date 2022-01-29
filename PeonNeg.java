@@ -1,4 +1,4 @@
-public class PeonNeg extends PzaNeg{
+public class PeonNeg extends PzaJug{
     
     int fila, columa;
     boolean color;
@@ -14,5 +14,18 @@ public class PeonNeg extends PzaNeg{
 
     }
     
+    public boolean move(PzaJug tablero[][], int x, int y, int w, int z){
+	boolean g=true;
+	
+		if((z-y)==0){
+	System.out.println("HOLA");
+		        if((w-x)==1){
+
+			    }else{g=false;}
+	}else{
+	    	g=false;
+	}
+    return g;
+}
     
 }

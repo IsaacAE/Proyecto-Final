@@ -1,4 +1,4 @@
-public class PeonBlan extends PzaBlan{
+public class PeonBlan extends PzaJug{
     
     int fila, columa;
     boolean color;
@@ -14,6 +14,20 @@ public class PeonBlan extends PzaBlan{
 	return "p";
 
     }
+    
+     public boolean move(PzaJug tablero[][], int x, int y, int w, int z){
+	boolean g=true;
+	
+		if((y-z)==0){
+	System.out.println("HOLA");
+		        if((x-w)==1){
+
+			    }else{g=false;}
+	}else{
+	    	g=false;
+	}
+    return g;
+}
 
 
 	

@@ -1,29 +1,41 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 
 public class Tablero{
     
     public static void mover(PzaJug tablero[][], int x, int y, int w, int z){
 	int g;
-	PzaJug mov = new PzaJug(0,0,true,"mov");
-	PzaJug mov2 = new PzaJug(0,0,true,"mov");
+	PzaJug mov = new PzaJug(0,0,true,"vac");
+	PzaJug mov2 = new PzaJug(0,0,true,"vac");
      
-	Vacia vac = new Vacia(0,0,true,"mov");
+	Vacia vac = new Vacia(0,0,true,"vac");
 
    
    
     mov = tablero[x][y];
     tablero[x][y] = vac;
-    tablero[w][z]= mov;
-    
-    
-    
+    tablero[w][z]= mov;  
 }
+
+    public static void imprimir_tablero(PzaJug tablero[][],int filas, int columnas){
+	for ( filas=0; filas < tablero.length; filas++){
+    for ( columnas=0; columnas < tablero[filas].length; columnas++) {
+
+     System.out.print(" ");System.out.print (tablero[filas][columnas]);
+
+    }
+  System.out.println();
+
+ }
+
+    }
+
 
     public static boolean verificar(PzaJug tablero[][], int x, int y, int w, int z){
 	int i;
 	boolean valor=true;
-		    PzaJug aux = new PzaJug(0,0,true,"aux");
+		    PzaJug aux = new PzaJug(0,0,true,"vac");
 	if(x==w){
 	    if(y<z){
 		for( i = y+1; i<=z; i++){
@@ -78,12 +90,13 @@ public class Tablero{
 	return valor;
     }
 
+
     public static void main(String[] args){
 
-	int x1=0,y1=0,z=0,w=0,contador=6;
+	int x1=0,y1=0,z=0,w=0,contador=4, resp=0;
 	boolean coco=false,juego=true; 
 	Scanner escaner = new Scanner(System.in);
-	 PzaJug temp = new PzaJug(0,0,true,"temp");
+	 PzaJug temp = new PzaJug(0,0,true,"vac");
 
         Vacia a = new Vacia(0,0,true,"vac");
         Vacia b = new Vacia(0,0,true,"vac");
@@ -171,7 +184,14 @@ public class Tablero{
        	tablero[3][3]= d1;
        	tablero[3][4]= e1;
       	tablero[3][5]= f1;
+	
 	while(juego==true){
+	    /* System.out.println(contador);
+	    if(contador == 0){
+		juego=false;
+		break;
+		}*/
+	    
 	while(contador!=0){
   System.out.println("\n \n");
 	    if(contador%2==0){
@@ -181,22 +201,16 @@ public class Tablero{
 		System.out.println("JUEGAN NEGRAS \n");
 
 	    }
-	  
-	for (int x=0; x < tablero.length; x++) 
- {
-    for (int y=0; y < tablero[x].length; y++) 
-    {
 
-     System.out.print(" ");System.out.print (tablero[x][y]);
+	    System.out.println(contador);
+	    imprimir_tablero(tablero,5,5);
 
-    }
-  System.out.println();
-
- }
-    
+	    
 	
 	do{ 
 	try{
+	    coco=true;
+	   
 	System.out.println("Dame la fila de la pieza que vas a mover");
 
     x1 = escaner.nextInt();
@@ -215,22 +229,28 @@ public class Tablero{
     
    
     temp = tablero[x1][y1];
+    	}catch(InputMismatchException ez){
+        System.out.println("\n¿Al menos sabes jugar?, intenta de nuevo");
+	    coco=false;
+	   
+	     imprimir_tablero(tablero,5,5);
+	     
+     escaner.next();
     
-    	}catch(ArrayIndexOutOfBoundsException ex){
+    
+            }catch(ArrayIndexOutOfBoundsException ex){
 
 	    System.out.println("Tantito coco, por favor, intenta de nuevo");
 
-	    x1=0;
-	    y1=0;
-	    w=0;
-	    z=0;
-	    //escaner.next();
-	    return;
-	} 
+	    coco=false;
+	     imprimir_tablero(tablero,5,5);
+	}
 	}while(coco==false);
+
+	//CIERRE DE PRIMER ATRAPA INGENUOS
 	
-    int g=1;
-     g = temp.getFila();
+    
+    
      if((contador%2==0)&&(temp.getColor()==true)){
 	
       }else if((contador%2!=0)&&(temp.getColor()==false)){
@@ -240,89 +260,105 @@ public class Tablero{
 	  System.out.println("\nPierdes un turno por tramposo");
 	  contador--;
 	  break;
-      }
-
-
-     if((temp.getTipo()=="vac")||((x1==w)||(y1==z))){
-	 System.out.println("\n¿Eres bobo o que te pasa?, pierdes un turno por listillo");
-	 contador--;
-	 break;
-
      }
-     switch(temp.getTipo()){
 
-    case "peon":
+	   if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
+	 System.out.println("\n¿Eres bobo?, pierdes un turno por listillo \n");
+	 System.out.println(contador);
+	 contador--;
+	 //break;
+	 
 
-	if((y1-z)==0){
-	System.out.println("HOLA");
+	   }
 
-	if(temp.getColor()==true){
-	    
-		    System.out.println("ES BLANCA");
-		        if((x1-w)==1){
-			     System.out.println("HEY");
-			     mover(tablero,x1,y1,w,z);
+     
+     	PzaJug  ojo = new PeonBlan(0,0,true,"vac");
+	ojo = tablero[w][z];
 
-			    }else{System.out.println("ERROR");}
+	 System.out.println("\n¿Qué deseas hacer?\n1.Mover\n2.Comer\n3.Salir del juego\n");
+	    resp=escaner.nextInt();
+
+	    switch(resp){
+
+	    case 1:
+		if(ojo.getTipo()!="vac"){
+		    if(ojo.getColor()==temp.getColor()){
+
+			System.out.println("Estas intentando mover tu pieza a un lugar ocupado, es movimiento ilegal, pierdes un turno");
+			//contador--;
+				//
+			
+
+		    }else if(temp.getTipo()!="peon"){
+			System.out.println("Parece que intentas comer una pieza, intenta de nuevo");
+			contador++;
+		    }else{
+				System.out.println("Es movimiento ilegal, pierdes un turno");
+		    }
+
+		}else if(temp.move(tablero,x1,y1,w,z)==true){
+
+	    mover(tablero,x1,y1,w,z);
 	}else{
+	     System.out.println("\n¿Todo bien en casa?, pierdes un turno. \n");
+	     //contador-1;
+	
 
+		}
+		 break;
+
+	    case 2:
+
+		if(ojo.getTipo()=="vac"){
+		    System.out.println("Me parece que más bien quieres mover tu pieza, intenta de nuevo");
+		    contador++;
+		}else if(ojo.getColor()==temp.getColor()){
+			System.out.println("No puedes comer tus propias piezas, pierdes un turno");
+		    }else if(temp.getTipo()=="peon"){
+			if(((x1+1)==w)||((x1-1)==w)&&(((y1+1)==z)||((y1-1)==z))){
+
+			    mover(tablero,x1,y1,w,z);
+
+			}
+		}else if(temp.move(tablero,x1,y1,w,z)==true){
+
+	    mover(tablero,x1,y1,w,z);
+	}else{
+	     
+
+		}       contador--;
+			break;
+
+	    case 3:
+		contador = -100;
+		juego = false;
+		break;
+
+	    default:
+
+		System.out.println("\n Ahhhh, chistosito, ahora por eso no juegas");
+			contador = -100;
+		juego = false;
+		break;
+
+	    }
+	
+
+		//break;
+
+		
+	    }
+	     contador--;
+	    	if(contador <= 0 ){
+	    juego = false;
+		}
 	   
-	     System.out.println("ES NEGRA");
-	     if((w-x1)==1){
-			     System.out.println("HEY");
-			     mover(tablero,x1,y1,w,z);
-
-			    }else{System.out.println("ERROR");}
 	}
-	}else{
-	    	System.out.println("MOVIMIENTO INVÁLIDO");
+		System.out.println("\nEl juego ha acabado por turnos, el ganador es:");
+	
 	}
 	
-	break;
-
-
-     case "caba":
-
-	 if((x1-2)==w || (x1+2)==w){
-	     if((y1+1)==z || (y1-1)==z){
-		 mover(tablero,x1,y1,w,z);
-	     }else{ System.out.println("ERROR");}
-	 }else{System.out.println("ERROR");}
-
-	 break;
-
-     case "torre":
-	 if(verificar(tablero,x1,y1,w,z)){
-	      mover(tablero,x1,y1,w,z);
-	     
-	 }else{ System.out.println("ERROR");}
-	 
-	 break;
-
-     case "rey":
-
-	 if(((x1==w)&&(((y1-1)==z)||((y1+1)==z)))||((y1==z)&&(((x1-1)==w) ||((x1+1)==w)))){
-	      mover(tablero,x1,y1,w,z);
-	 }else{
-	     System.out.println("TRAMPOSO");
-	 }
-	 break;
-    }
-     
-
-	contador--;
-	}
-	if(contador == 0 ){
-	    juego = false;
-	}
-	}
-    }
-
-  
-
-    
-    
-
-
-
 }
+	
+
+

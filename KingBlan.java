@@ -1,4 +1,4 @@
-public class KingBlan extends PzaBlan{
+public class KingBlan extends PzaJug{
     
     int fila, columa;
     boolean color;
@@ -17,5 +17,15 @@ public class KingBlan extends PzaBlan{
 	return "k";
 
     }
-
+    //
+    public boolean move(PzaJug tablero[][], int x, int y, int w, int z){
+	boolean g=true;
+     if(((x==w)&&(((y-1)==z)||((y+1)==z)))||((y==z)&&(((x-1)==w) ||((x+1)==w)))){
+	    
+	 }else{
+	     g=false;
+	 }
+	 return g;
+	 }
+//
     }

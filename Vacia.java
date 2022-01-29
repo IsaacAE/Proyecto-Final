@@ -6,4 +6,9 @@ public class Vacia extends PzaJug{
 
     }
 
+ public boolean move(PzaJug tablero[][], int x, int y, int w, int z){
+	boolean g=false;
+	 
+    return g;
+}
 }
