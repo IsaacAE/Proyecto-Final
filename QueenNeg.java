@@ -18,7 +18,8 @@ public class QueenNeg extends PzaJug{
 
     }
     
-    public boolean move(PzaJug tablero[][], int x, int y, int w, int z){
+   
+	  public boolean move(PzaJug tablero[][], int x, int y, int w, int z){
 	boolean g=true;
 	int p,j,i=0;
 
@@ -28,11 +29,11 @@ public class QueenNeg extends PzaJug{
 	if((x==w)||(y==z)){
 	if(x==w){
 	    if(y<z){
-		for( i = y+1; i<z; i++){
+		for(i = (y+1); i<z; i++){
 	
 		    aux = tablero[x][i];
 		    if(aux.getTipo()!="vac"){
-			g= false;
+			g = false;
 		    }
 		    
 		}
@@ -50,10 +51,10 @@ public class QueenNeg extends PzaJug{
 
 	}//
 	
-	if(y==z){
-
+	 if(y==z){
+	//MOVER ABAJO
 	       if(x<w){
-		for( i = x+1; i<w; i++){
+		for( i = (x+1); i<w; i++){
 	        
 		    aux = tablero[i][y];
 		    if(aux.getTipo()!="vac"){
@@ -75,12 +76,11 @@ public class QueenNeg extends PzaJug{
 
 	}
 	}
+
+	}else if ((x-w)==(z-y)||(x-w)==(y-z)){
 	
-
-	//DIAGONALES
-	}if(((w-x)==(z-y)||((w-x)==(y-z)))){
-
-	if((x-w)==(z-y)){
+	
+	 if((x-w)==(z-y)){
 	     p=x-1;
 	     j=y+1;
 	     while((p>w)){
@@ -108,12 +108,10 @@ public class QueenNeg extends PzaJug{
 		     
 	     }
 	     //HACIA ABAJO DERECHA
-	}
-	
-	if((w-x)==(z-y)){
-	     p=x+1;
+	}else if((w-x)==(z-y)){
+	     p=w+1;
 	     j=y+1;
-	     while((p<w)){
+	     while((p<x)){
 		     aux = tablero[p][y+1];
 		     if(aux.getTipo()=="vac"){
 			 
@@ -125,26 +123,23 @@ public class QueenNeg extends PzaJug{
 	     }
 	     //HACIA ABAJO IZQUIERDA
 	}else if((w-x)==(y-z)){
-	     p=x+1;
+	     p=w+1;
 	     j=y-1;
 	     while((p<w)){
-		     aux = tablero[p][j];
-		     if(aux.getTipo()!="vac"){
-			 g=false;
-			
-		     }
+		     aux = tablero[p][y-1];
+		     if(aux.getTipo()=="vac"){
+			 
+
+		     }else{g=false;}
 
 		     p++;
-		     j--;
 		     
 	     }
-            }else{g=false;}
-
-}else{ g=false;}	 
-	    
+            }
+	 
+	    }else{ g = false;}
 	  
 	 return g;
-	 
     }
     
 
