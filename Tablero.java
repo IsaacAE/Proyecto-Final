@@ -334,18 +334,23 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 			contador--;
 			break;
 		    }else if(temp.getTipo()=="peon"){
-			if(((x1+1)==w)||((x1-1)==w)&&(((y1+1)==z)||((y1-1)==z))){
+			if(((y1-1)==z)||((y1+1)==z)){
+			    if(((x1+1)==w)&&(temp.getColor()==false)){
+				     mover(tablero,x1,y1,w,z);
+				
+			    }else  if(((x1-1)==w)&&(temp.getColor()==true)){
+				     mover(tablero,x1,y1,w,z);
 			    
-			    mover(tablero,x1,y1,w,z);
-			    
+			    }
 			}
+			
 		    }else if(temp.move(tablero,x1,y1,w,z)==true){
 
 			mover(tablero,x1,y1,w,z);
-		    }else{
+			}else{
 	     
 
-		    }       contador--;
+			}       contador--;
 		    break;
 	//Salir del juego
 		case 3:
