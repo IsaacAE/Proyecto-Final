@@ -17,7 +17,7 @@ public class Tablero{
 *@param x valor de la fila actual de la pieza
 *@param y valor actual de la columna de la pieza
 *@param w valor de la fila a la que se quiere mover la pieza
-*@param valor de la columna a la cual se quiere mover la pieza
+*@param z valor de la columna a la cual se quiere mover la pieza
 */
     public static void mover(PzaJug tablero[][], int x, int y, int w, int z){
 	int g;
@@ -56,6 +56,105 @@ public class Tablero{
 	}
 
     }
+ /**
+*Metodo para coronar una pieza
+*@author Alcantara Estrada Kevin Isaac
+*@version 1.0
+*@param tablero[][] Arreglo de dos dimensiones de objetos de la clase PzaJug donde se trabajara
+*@param x fila de donde viene la pieza
+*@param y columna de donde viene la pieza
+*@param w fila donde esta la pieza
+*@param z columna donde esta la pieza
+@param corona respuesta del usuario
+*/
+    public static void coronar(PzaJug tablero[][], int x, int y, int w, int z, int corona){
+
+
+	//PARA CORONAR
+	boolean error = false;
+       
+	Scanner escaner = new Scanner(System.in);
+
+	do{
+	    try{
+	    
+				for(int i=0; i<6;i++){
+				if(tablero[5][i] instanceof PeonNeg){
+			     PzaJug coronado = new PzaJug(0,0,false,"coroando");
+			     
+				    
+				    
+				    System.out.println("Elige la pieza que deseas coronar por tu peon\n1.Caballo\n2.Torre\n3.Reina");
+				    corona = escaner.nextInt();
+				    switch(corona){
+
+				    case 1:
+					CabaNeg cabaCo = new CabaNeg(0,0,false,"caba");
+					tablero[w][z] = cabaCo;
+					break;
+
+				     case 2:
+					TorreNeg torreCo = new TorreNeg(0,0,false,"torre");
+						tablero[w][z] = torreCo;
+					break;
+
+					  case 3:
+					      QueenNeg kuinCo = new QueenNeg(0,0,false,"reina");
+						tablero[w][z]= kuinCo;
+					break;
+
+				    default:
+
+					System.out.println("Intenta de nuevo");
+					error=true;
+				    }
+				}
+				}
+
+					//PARA CORONAR BLANCO
+				for(int i=0; i<6;i++){
+				if(tablero[0][i] instanceof PeonBlan){
+			     PzaJug coronado = new PzaJug(0,0,false,"coroando");
+			     
+				    
+				    
+				    System.out.println("Elige la pieza que deseas coronar por tu peon\n1.Caballo\n2.Torre\n3.Reina");
+				    corona = escaner.nextInt();
+				    switch(corona){
+
+				    case 1:
+					CabaBlan cabaCob = new CabaBlan(0,0,true,"caba");
+					tablero[w][z] = cabaCob;
+					break;
+
+				     case 2:
+					TorreBlan torreCob = new TorreBlan(0,0,true,"torre");
+						tablero[w][z] = torreCob;
+					break;
+
+					  case 3:
+					      QueenBlan kuinCob = new QueenBlan(0,0,true,"reina");
+						tablero[w][z]= kuinCob;
+					break;
+					
+					 default:
+
+					System.out.println("Intenta de nuevo");
+					error=true;
+				    }
+
+				}
+				}
+				
+	    }catch(InputMismatchException ax ){
+			System.out.println("Intenta de nuevo");
+					error=true;
+					escaner.next();
+	    }
+				
+	
+	}while(error==true);
+    }
 
 
     /**
@@ -67,8 +166,8 @@ public class Tablero{
 
     public static void main(String[] args){
 	//Principales variables a utilizar
-	int x1=0,y1=0,z=0,w=0,contador=4, resp=0, partido=0;
-	boolean coco=false,juego=true, turnos; 
+	int x1=0,y1=0,z=0,w=0,contador=4, resp=0, partido=0, corona=0;
+	boolean coco=false,juego=true, turnos, error=false; 
 	
 	//Escaner para recibir datos del usuario
 	Scanner escaner = new Scanner(System.in);
@@ -84,6 +183,7 @@ public class Tablero{
 	Vacia e = new Vacia(0,0,true,"vac");
 	Vacia f = new Vacia(0,0,true,"vac");
 	Vacia extra = new Vacia(0,0,true,"vac");
+		Vacia extra2 = new Vacia(0,0,true,"vac");
 
         Vacia a1 = new Vacia(0,0,true,"vac");
         Vacia b1 = new Vacia(0,0,true,"vac");
@@ -315,6 +415,7 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 			    }else if(temp.move(tablero,x1,y1,w,z)==true){
 
 				mover(tablero,x1,y1,w,z);
+				//CORONAR
 				contador--;
 			    }else{
 				System.out.println("\n¿Todo bien en casa?, pierdes un turno. \n");
@@ -337,11 +438,96 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 			if(((y1-1)==z)||((y1+1)==z)){
 			    if(((x1+1)==w)&&(temp.getColor()==false)){
 				     mover(tablero,x1,y1,w,z);
-				
+					       
+				     
 			    }else  if(((x1-1)==w)&&(temp.getColor()==true)){
 				     mover(tablero,x1,y1,w,z);
-			    
+			    			
+
 			    }
+			   
+			    do{
+			
+	    try{
+		
+	    
+				for(int i=0; i<6;i++){
+				if(tablero[5][i] instanceof PeonNeg){
+			     PzaJug coronado = new PzaJug(0,0,false,"coroando");
+			     
+				    
+				    
+				    System.out.println("Elige la pieza que deseas coronar por tu peon\n1.Caballo\n2.Torre\n3.Reina");
+				    corona = escaner.nextInt();
+				    switch(corona){
+
+				    case 1:
+					CabaNeg cabaCo = new CabaNeg(0,0,false,"caba");
+					tablero[w][z] = cabaCo;
+					break;
+
+				     case 2:
+					TorreNeg torreCo = new TorreNeg(0,0,false,"torre");
+						tablero[w][z] = torreCo;
+					break;
+
+					  case 3:
+					      QueenNeg kuinCo = new QueenNeg(0,0,false,"reina");
+						tablero[w][z]= kuinCo;
+					break;
+
+				    default:
+
+					System.out.println("Intenta de nuevo");
+					error=true;
+				    }
+				}
+				}
+
+					//PARA CORONAR BLANCO
+				for(int i=0; i<6;i++){
+				if(tablero[0][i] instanceof PeonBlan){
+			     PzaJug coronado = new PzaJug(0,0,false,"coroando");
+			     
+				    
+				    
+				    System.out.println("Elige la pieza que deseas coronar por tu peon\n1.Caballo\n2.Torre\n3.Reina");
+				    corona = escaner.nextInt();
+				    switch(corona){
+
+				    case 1:
+					CabaBlan cabaCob = new CabaBlan(0,0,true,"caba");
+					tablero[w][z] = cabaCob;
+					break;
+
+				     case 2:
+					TorreBlan torreCob = new TorreBlan(0,0,true,"torre");
+						tablero[w][z] = torreCob;
+					break;
+
+					  case 3:
+					      QueenBlan kuinCob = new QueenBlan(0,0,true,"reina");
+						tablero[w][z]= kuinCob;
+					break;
+					
+					 default:
+
+					System.out.println("Intenta de nuevo");
+					error=true;
+				    }
+
+				}
+				}
+				
+	    }catch(InputMismatchException ax ){
+			System.out.println("Intenta de nuevo");
+					error=true;
+					escaner.next();
+	    }
+				
+	
+	}while(error==true);
+			    
 			}
 			
 		    }else if(temp.move(tablero,x1,y1,w,z)==true){
@@ -445,6 +631,88 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 		    System.out.println("NEGRAS PIERDEN / BLANCAS GANA");
 		    return;
 		}
+
+			 do{
+			
+	    try{
+		
+	    
+				for(int i=0; i<6;i++){
+				if(tablero[5][i] instanceof PeonNeg){
+			     PzaJug coronado = new PzaJug(0,0,false,"coroando");
+			     
+				    
+				    
+				    System.out.println("Elige la pieza que deseas coronar por tu peon\n1.Caballo\n2.Torre\n3.Reina");
+				    corona = escaner.nextInt();
+				    switch(corona){
+
+				    case 1:
+					CabaNeg cabaCo = new CabaNeg(0,0,false,"caba");
+					tablero[w][z] = cabaCo;
+					break;
+
+				     case 2:
+					TorreNeg torreCo = new TorreNeg(0,0,false,"torre");
+						tablero[w][z] = torreCo;
+					break;
+
+					  case 3:
+					      QueenNeg kuinCo = new QueenNeg(0,0,false,"reina");
+						tablero[w][z]= kuinCo;
+					break;
+
+				    default:
+
+					System.out.println("Intenta de nuevo");
+					error=true;
+				    }
+				}
+				}
+
+					//PARA CORONAR BLANCO
+				for(int i=0; i<6;i++){
+				if(tablero[0][i] instanceof PeonBlan){
+			     PzaJug coronado = new PzaJug(0,0,false,"coroando");
+			     
+				    
+				    
+				    System.out.println("Elige la pieza que deseas coronar por tu peon\n1.Caballo\n2.Torre\n3.Reina");
+				    corona = escaner.nextInt();
+				    switch(corona){
+
+				    case 1:
+					CabaBlan cabaCob = new CabaBlan(0,0,true,"caba");
+					tablero[w][z] = cabaCob;
+					break;
+
+				     case 2:
+					TorreBlan torreCob = new TorreBlan(0,0,true,"torre");
+						tablero[w][z] = torreCob;
+					break;
+
+					  case 3:
+					      QueenBlan kuinCob = new QueenBlan(0,0,true,"reina");
+						tablero[w][z]= kuinCob;
+					break;
+					
+					 default:
+
+					System.out.println("Intenta de nuevo");
+					error=true;
+				    }
+
+				}
+				}
+				
+	    }catch(InputMismatchException ax ){
+			System.out.println("Intenta de nuevo");
+					error=true;
+					escaner.next();
+	    }
+				
+	
+	}while(error==true);
 	
 	}
 	     contador--;
@@ -473,6 +741,5 @@ if((temp.getTipo()=="vac")||((x1==w)&&(y1==z))){
 	}
 //FIN DEL PROGRAMA	
 }
-	//FIN DE LA CLASE
-
+	//FIN 
 
